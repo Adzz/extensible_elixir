@@ -55,10 +55,20 @@ end
 # But this requires that we know what shape we have when we call it:
 
 square_area(square)
-# => Blows up!
-square_area(circle)
+square_area(circle) # => Blows up!
 
 # This is not extensible. We have to know too much about the type of thing we have, making it hard to abstract
+
+
+
+
+
+
+
+
+
+
+
 
 # To combat this we could use the same name, but different arity:
 
@@ -102,11 +112,6 @@ end
 
 
 
-
-
-# The above is the same as the circle definition. And we still need to know what shape we have to be
-# able to pull the right fields off.
-
 # What about Pattern Matching!
 
 def area(%{side: side}) do
@@ -126,11 +131,30 @@ area(square)
 area(circle)
 area(triangle)
 
-# This is mucchhh better. Now we can implement something like this:
+# This is much better. Now we can implement something like this:
 
 def price_per_shape(shape, price_per_sqm) do
   area(shape) * price_per_sqm
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # Notice how the calling site doesn't know about the different implantations of the area function
@@ -204,7 +228,7 @@ end
 
 
 
-
+# this is how we define a protocol
 defprotocol Shape do
   def area(shape)
 end
@@ -385,7 +409,7 @@ end
 
 
 
-# But how do we add a triangle? Again, imagine this is defined in a third part lib and we don't have
+# But how do we add a triangle? Again, imagine this is defined in a third party lib and we don't have
 # access to add another case.
 
 # The challenge here is: how can we add both new shapes AND new operations on those shapes, without
